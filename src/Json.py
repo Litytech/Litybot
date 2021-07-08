@@ -14,7 +14,7 @@ class Json:
     
     def readJson(self):
         """Read the json file"""
-        with open('./inspireList.json', encoding='utf-8') as file:
+        with open('assets\inspireList.json', encoding='utf-8') as file:
             data = json.load(file)
             self.inspireme = data['inspire']
 

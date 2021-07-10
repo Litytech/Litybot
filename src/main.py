@@ -16,7 +16,7 @@ def main() -> None:
     """
         Start the bot.
         Author: José Cruz
-        Version 1.0.0
+        Version 1.1.0
     """
     litybot = Litybot()
     token = dotenv_values(".env").get("TOKEN")
@@ -38,7 +38,7 @@ def main() -> None:
             SUMMARY: [MessageHandler(Filters.text & ~Filters.command, litybot.setEventName)],
             DATE: [MessageHandler(Filters.regex('^([2][0][2-9][0-9][-][0-1][1-9][-][0-3][0-9])$'), litybot.setEventDate)],
             TIMES: [MessageHandler(Filters.regex('^(([0]?[1-9]|[1][0-2])[:][0-9]{2}[ ]((am|pm)|(AM|PM))[ ][-][ ]([0]?[1-9]|[1][0-2])[:][0-9]{2}[ ]((am|pm)|(AM|PM)))$'), litybot.setEventTimes)],
-            GUESTS: [MessageHandler(Filters.regex("^([,][a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)+$"), litybot.setGuests), CommandHandler('default', litybot.defaultGuests)]
+            GUESTS: [MessageHandler(Filters.regex("^([a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?[,]?)+$"), litybot.setGuests), CommandHandler('default', litybot.defaultGuests)]
         },
         fallbacks = [CommandHandler("cancelar", litybot.cancel)]
     )

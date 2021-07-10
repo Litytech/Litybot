@@ -12,7 +12,7 @@ class Litybot:
     """
         Class with the logic for make the responses for the bot to the users
         Author: José Cruz
-        Version: 1.0.1
+        Version: 1.1.0
     """
 
     def __init__(self):
@@ -220,9 +220,9 @@ Estoy para ayudarte\.'
             context: CallbackContext
         """
 
-        guests = update.message.text.split(",")
+        guests = update.message.text.split(",") if "," in update.message.text else [update.message.text]
 
-        for i in range(1, len(guests)):
+        for i in range(len(guests)):
             self.event.guests.append({"email": guests[i]})
         
         self.programMeet(update, context)
@@ -240,9 +240,10 @@ Estoy para ayudarte\.'
             context: CallbackContext
         """
 
-        guests = str(dotenv_values(".env").get("DEFAULT_EMAILS")).split(",")
+        defaultGuests = dotenv_values(".env").get("DEFAULT_EMAILS")
+        guests = defaultGuests.split(",") if "," in defaultGuests else [defaultGuests]
 
-        for i in range(1, len(guests)):
+        for i in range(len(guests)):
             self.event.guests.append({"email": guests[i]})
         
         self.programMeet(update, context)
